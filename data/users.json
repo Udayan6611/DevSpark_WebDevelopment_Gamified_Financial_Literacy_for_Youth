@@ -1,0 +1,37 @@
+[
+  {
+    "id": "user_1774606343743_82436",
+    "email": "udayandusane9604@gmail.com",
+    "username": "ud",
+    "passwordHash": "$2b$10$PEIM23tPiGyu9cUrN9Pw6O2yXLmFV.LmjLcTiNuS62mksJaD/LKAi",
+    "profile": {
+      "id": "user_1774606343743_82436",
+      "username": "ud",
+      "level": 1,
+      "totalXP": 200,
+      "longestStreak": 1,
+      "currentStreak": 1,
+      "quizzesCompleted": 1,
+      "achievements": [
+        {
+          "id": "wallet_1000",
+          "title": "Millionaire Mindset",
+          "description": "Accumulate $1000+ in wallet",
+          "icon": "💰",
+          "unlockedAt": 1774606654782
+        },
+        {
+          "id": "first_quiz",
+          "title": "First Steps",
+          "description": "Complete your first quiz",
+          "icon": "🎯",
+          "unlockedAt": 1774606911196
+        }
+      ],
+      "createdAt": 1774606343956,
+      "challengesCompleted": 1,
+      "lastActiveDate": "2026-03-27"
+    },
+    "createdAt": 1774606343956
+  }
+]

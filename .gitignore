@@ -1,7 +1,7 @@
 node_modules/
-backend/node_modules/
+finance-ai-app/server/node_modules/
 .env
-backend/.env
+finance-ai-app/server/.env
 serviceAccountKey.json
-backend/serviceAccountKey.json
+finance-ai-app/server/serviceAccountKey.json
 npm-debug.log*

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { createUser, getUserByEmail, getUserByUsername } from '@/lib/server/userDb';
+import { isSupabaseConfigured } from '@/lib/server/supabase';
 import {
   getAuthCookieName,
   getAuthCookieOptions,
@@ -10,6 +11,16 @@ import { UserProfile } from '@/store/useStore';
 
 export async function POST(req: NextRequest) {
   try {
+    if (process.env.NODE_ENV === 'production' && !isSupabaseConfigured()) {
+      return NextResponse.json(
+        {
+          error:
+            'Supabase is not configured in production. Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in your hosting environment.',
+        },
+        { status: 500 }
+      );
+    }
+
     const body = await req.json();
     const email = String(body?.email ?? '').trim().toLowerCase();
     const username = String(body?.username ?? '').trim();
@@ -66,7 +77,8 @@ export async function POST(req: NextRequest) {
     const res = NextResponse.json({ user: profile });
     res.cookies.set(getAuthCookieName(), token, getAuthCookieOptions());
     return res;
-  } catch {
-    return NextResponse.json({ error: 'Failed to create account.' }, { status: 500 });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Failed to create account.';
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

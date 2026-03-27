@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { getUserByEmail } from '@/lib/server/userDb';
 import { isSupabaseConfigured } from '@/lib/server/supabase';
+import { getErrorMessage } from '@/lib/server/errorMessage';
 import {
   getAuthCookieName,
   getAuthCookieOptions,
@@ -48,7 +49,7 @@ export async function POST(req: NextRequest) {
     res.cookies.set(getAuthCookieName(), token, getAuthCookieOptions());
     return res;
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Failed to log in.';
+    const message = getErrorMessage(error, 'Failed to log in.');
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

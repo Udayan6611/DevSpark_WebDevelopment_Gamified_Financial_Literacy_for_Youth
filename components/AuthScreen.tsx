@@ -2,7 +2,22 @@
 
 import React, { useState } from 'react';
 import { useStore } from '@/store/useStore';
+import type { UserProfile } from '@/store/useStore';
 import { Trophy, Zap } from 'lucide-react';
+
+function isUserProfile(value: unknown): value is UserProfile {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+
+  const maybe = value as Partial<UserProfile>;
+  return (
+    typeof maybe.id === 'string' &&
+    typeof maybe.username === 'string' &&
+    typeof maybe.level === 'number' &&
+    typeof maybe.totalXP === 'number'
+  );
+}
 
 export const AuthScreen: React.FC = () => {
   const [mode, setMode] = useState<'login' | 'signup'>('signup');
@@ -33,9 +48,21 @@ export const AuthScreen: React.FC = () => {
         body: JSON.stringify(body),
       });
 
-      const payload = await response.json();
+      let payload: { error?: string; user?: unknown } | null = null;
+      try {
+        payload = await response.json();
+      } catch {
+        payload = null;
+      }
+
       if (!response.ok) {
-        setError(payload?.error || 'Authentication failed.');
+        const serverError = payload?.error?.trim();
+        setError(serverError || `Authentication failed (HTTP ${response.status}).`);
+        return;
+      }
+
+      if (!payload?.user || !isUserProfile(payload.user)) {
+        setError('Authentication succeeded but user data was missing. Please try again.');
         return;
       }
 

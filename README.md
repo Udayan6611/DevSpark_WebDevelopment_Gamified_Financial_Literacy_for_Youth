@@ -82,6 +82,8 @@ Run the container:
 
 docker run --rm -p 3000:3000 --env-file .env finpath
 
+This project currently expects environment values at runtime (via `--env-file`), not as Docker build arguments.
+
 ## Free Hosting (Recommended)
 
 Use Vercel + Supabase.

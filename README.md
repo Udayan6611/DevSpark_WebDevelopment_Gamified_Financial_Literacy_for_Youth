@@ -76,11 +76,15 @@ npm run build
 
 Build the image:
 
+```bash
 docker build -t finpath .
+```
 
 Run the container:
 
+```bash
 docker run --rm -p 3000:3000 --env-file .env finpath
+```
 
 This project currently expects environment values at runtime (via `--env-file`), not as Docker build arguments.
 

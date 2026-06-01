@@ -87,6 +87,7 @@ docker run --rm -p 3000:3000 --env-file .env finpath
 ```
 
 This project currently expects environment values at runtime (via `--env-file`), not as Docker build arguments.
+`.env` files are intentionally excluded from the image by `.dockerignore` for security.
 
 ## Free Hosting (Recommended)
 

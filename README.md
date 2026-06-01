@@ -72,6 +72,16 @@ npm run dev
 
 npm run build
 
+## Docker
+
+Build the image:
+
+docker build -t finpath .
+
+Run the container:
+
+docker run --rm -p 3000:3000 --env-file .env finpath
+
 ## Free Hosting (Recommended)
 
 Use Vercel + Supabase.

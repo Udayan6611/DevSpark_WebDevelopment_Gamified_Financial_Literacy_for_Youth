@@ -5,18 +5,23 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 
-FROM deps AS prod-deps
-RUN npm prune --omit=dev
+FROM node:20-alpine AS prod-deps
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci --omit=dev
 
 FROM node:20-alpine AS builder
 
 WORKDIR /app
 
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_ENV=production
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN NODE_ENV=production npm run build
+RUN npm run build
 
 FROM node:20-alpine AS runner
 

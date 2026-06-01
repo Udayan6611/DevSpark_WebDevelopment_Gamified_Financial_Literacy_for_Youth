@@ -12,13 +12,13 @@ FinPath is a gamified financial literacy web app built with Next.js App Router, 
 
 ## Core Features
 
-- Learning map with progressive module unlocks
-- Standard quizzes and challenge mode
-- Wallet simulation with random life events
-- Analytics dashboard with module scores
+- Learning map with progressive module unlocks.
+- Standard quizzes and challenge mode.
+- Wallet simulation with random life events.
+- Analytics dashboard with module scores.
 - Dynamic leaderboard
-- Profile with auto-unlocking achievements
-- Daily streak logic based on calendar day
+- Profile with auto-unlocking achievements.
+- Daily streak logic based on calendar day.
 
 ## Authentication
 
